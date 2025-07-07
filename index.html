@@ -401,6 +401,130 @@
             box-shadow: 0 4px 15px rgba(197, 36, 127, 0.3);
         }
 
+        /* World Clock Section */
+        .world-clock {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .continent {
+            position: absolute;
+            background: #2d5a3d;
+            border-radius: 50%;
+        }
+
+        .continent-1 {
+            width: 60px;
+            height: 40px;
+            top: 30%;
+            left: 20%;
+            border-radius: 40px 20px 30px 25px;
+        }
+
+        .continent-2 {
+            width: 45px;
+            height: 35px;
+            top: 45%;
+            right: 25%;
+            border-radius: 25px 35px 20px 30px;
+        }
+
+        .continent-3 {
+            width: 30px;
+            height: 50px;
+            top: 25%;
+            left: 50%;
+            border-radius: 15px 25px 30px 20px;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .timezone-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .timezone-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .timezone-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .city-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #FF6B9D;
+        }
+
+        .country-name {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 1rem;
+        }
+
+        .current-time {
+            font-size: 1.5rem;
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+            color: #4a9eff;
+            margin-bottom: 0.5rem;
+        }
+
+        .time-zone {
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+
+        .clock-icon {
+            width: 40px;
+            height: 40px;
+            margin: 0 auto 1rem;
+            border: 2px solid #FF6B9D;
+            border-radius: 50%;
+            position: relative;
+            background: rgba(255, 107, 157, 0.1);
+        }
+
+        .clock-icon::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 2px;
+            height: 12px;
+            background: #FF6B9D;
+            transform: translate(-50%, -100%);
+            transform-origin: bottom;
+        }
+
+        .clock-icon::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 2px;
+            height: 8px;
+            background: #4a9eff;
+            transform: translate(-50%, -100%) rotate(90deg);
+            transform-origin: bottom;
+        }
+
         /* Footer */
         footer {
             background: #1a252f;
@@ -460,6 +584,7 @@
                 <li><a href="#about">About</a></li>
                 <li><a href="#sessions">Sessions</a></li>
                 <li><a href="#calendar">Events</a></li>
+                <li><a href="#worldclock">Global Times</a></li>
                 <li><a href="#team">Team</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
@@ -688,6 +813,55 @@
         </div>
     </section>
 
+    <!-- World Clock Section -->
+    <section id="worldclock" class="world-clock section">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">Global Learning Community (current time)</h2>
+            <p style="font-size: 1.1rem; margin-bottom: 3rem; opacity: 0.9;">Our pathology sessions connect learners across time zones. Check the current time in our key educational hubs.</p>            
+            <div class="timezone-grid">
+                <div class="timezone-card">
+                    <div class="clock-icon"></div>
+                    <div class="city-name">Houston</div>
+                    <div class="country-name">Texas, USA</div>
+                    <div class="current-time" id="houston-time">--:--</div>
+                    <div class="time-zone">CDT (UTC-5)</div>
+                </div>
+                
+                <div class="timezone-card">
+                    <div class="clock-icon"></div>
+                    <div class="city-name">Michigan</div>
+                    <div class="country-name">Michigan, USA</div>
+                    <div class="current-time" id="michigan-time">--:--</div>
+                    <div class="time-zone">EDT (UTC-4)</div>
+                </div>
+                
+                <div class="timezone-card">
+                    <div class="clock-icon"></div>
+                    <div class="city-name">Glasgow</div>
+                    <div class="country-name">Scotland, UK</div>
+                    <div class="current-time" id="glasgow-time">--:--</div>
+                    <div class="time-zone">BST (UTC+1)</div>
+                </div>
+                
+                <div class="timezone-card">
+                    <div class="clock-icon"></div>
+                    <div class="city-name">Cape Verde</div>
+                    <div class="country-name">Cape Verde</div>
+                    <div class="current-time" id="capeverde-time">--:--</div>
+                    <div class="time-zone">CVT (UTC-1)</div>
+                </div>
+                
+                <div class="timezone-card">
+                    <div class="clock-icon"></div>
+                    <div class="city-name">São Paulo</div>
+                    <div class="country-name">Brazil</div>
+                    <div class="current-time" id="saopaulo-time">--:--</div>
+                    <div class="time-zone">BRT (UTC-3)</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Team Section -->
     <section id="team" class="section">
         <div class="container">
@@ -806,6 +980,60 @@
         document.querySelectorAll('.feature-card, .team-card, .stat-card, .contact-card').forEach(el => {
             observer.observe(el);
         });
+
+        // World Clock Functionality
+        function updateWorldClock() {
+            const now = new Date();
+            
+            // Houston, TX (CDT: UTC-5)
+            const houston = new Date(now.toLocaleString("en-US", {timeZone: "America/Chicago"}));
+            document.getElementById('houston-time').textContent = 
+                houston.toLocaleTimeString('en-US', { 
+                    hour: '2-digit', 
+                    minute: '2-digit',
+                    hour12: true 
+                });
+            
+            // Michigan (EDT: UTC-4)
+            const michigan = new Date(now.toLocaleString("en-US", {timeZone: "America/Detroit"}));
+            document.getElementById('michigan-time').textContent = 
+                michigan.toLocaleTimeString('en-US', { 
+                    hour: '2-digit', 
+                    minute: '2-digit',
+                    hour12: true 
+                });
+            
+            // Glasgow, Scotland (BST: UTC+1)
+            const glasgow = new Date(now.toLocaleString("en-US", {timeZone: "Europe/London"}));
+            document.getElementById('glasgow-time').textContent = 
+                glasgow.toLocaleTimeString('en-US', { 
+                    hour: '2-digit', 
+                    minute: '2-digit',
+                    hour12: true 
+                });
+            
+            // Cape Verde (CVT: UTC-1)
+            const capeverde = new Date(now.toLocaleString("en-US", {timeZone: "Atlantic/Cape_Verde"}));
+            document.getElementById('capeverde-time').textContent = 
+                capeverde.toLocaleTimeString('en-US', { 
+                    hour: '2-digit', 
+                    minute: '2-digit',
+                    hour12: true 
+                });
+            
+            // São Paulo, Brazil (BRT: UTC-3)
+            const saopaulo = new Date(now.toLocaleString("en-US", {timeZone: "America/Sao_Paulo"}));
+            document.getElementById('saopaulo-time').textContent = 
+                saopaulo.toLocaleTimeString('en-US', { 
+                    hour: '2-digit', 
+                    minute: '2-digit',
+                    hour12: true 
+                });
+        }
+
+        // Update clock immediately and then every second
+        updateWorldClock();
+        setInterval(updateWorldClock, 1000);
     </script>
 </body>
 </html>
