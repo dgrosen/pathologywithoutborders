@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Endocrine Pathology Fundamentals - August 28, 2025</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header & Navigation */
+        header {
+            background: linear-gradient(135deg, #C5247F 0%, #8B1A5C 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #C5247F 0%, #8B1A5C 100%);
+            color: white;
+            padding: 150px 0 100px;
+            text-align: center;
+            margin-top: 70px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .session-info {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .session-date {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .session-time {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+
+        .session-topics {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+
+        .topic-tag {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* Section Styling */
+        .section {
+            padding: 80px 0;
+        }
+
+        .section:nth-child(even) {
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #C5247F;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: #FF6B9D;
+        }
+
+        /* Cases Grid */
+        .cases-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .case-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-left: 5px solid #C5247F;
+        }
+
+        .case-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 35px rgba(197, 36, 127, 0.15);
+        }
+
+        .case-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .case-number {
+            background: linear-gradient(135deg, #C5247F, #8B1A5C);
+            color: white;
+            border-radius: 12px;
+            padding: 1rem;
+            text-align: center;
+            margin-right: 1rem;
+            min-width: 80px;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .case-title {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #C5247F;
+        }
+
+        .case-subtitle {
+            font-size: 1rem;
+            color: #666;
+            margin-top: 0.2rem;
+        }
+
+        .clinical-info {
+            background: rgba(197, 36, 127, 0.05);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid #FF6B9D;
+        }
+
+        .clinical-info h4 {
+            color: #C5247F;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .clinical-info p {
+            color: #555;
+            line-height: 1.5;
+        }
+
+        .wsi-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #C5247F, #8B1A5C);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: all 0.3s;
+            text-align: center;
+            width: 100%;
+        }
+
+        .wsi-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(197, 36, 127, 0.3);
+        }
+
+        /* Resources Section */
+        .resources-section {
+            background: linear-gradient(135deg, #8B1A5C 0%, #C5247F 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .resource-card {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: transform 0.3s;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .resource-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 2rem;
+        }
+
+        .resource-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #FF6B9D;
+        }
+
+        .resource-card p {
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+
+        .resource-button {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .resource-button:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            background: #1a252f;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .cases-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .case-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .case-number {
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Back button */
+        .back-button {
+            position: fixed;
+            top: 90px;
+            left: 20px;
+            background: rgba(197, 36, 127, 0.9);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            z-index: 999;
+            transition: all 0.3s;
+        }
+
+        .back-button:hover {
+            background: rgba(197, 36, 127, 1);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <div class="logo">🔬 Pathology Without Borders</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#cases">Cases</a></li>
+                <li><a href="#resources">Resources</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Back Button -->
+    <a href="javascript:history.back()" class="back-button">← Back to Calendar</a>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <h1 class="fade-in">Endocrine Pathology Fundamentals</h1>
+            <p class="fade-in">Expert-guided session exploring essential endocrine pathology cases with progressive complexity from basic to advanced diagnostic challenges.</p>
+            
+            <div class="session-info fade-in">
+                <div class="session-date">August 28, 2025</div>
+                <div class="session-time">2:00 PM - 3:00 PM UTC</div>
+                <div class="session-topics">
+                    <span class="topic-tag">Neoplasms</span>
+                    <span class="topic-tag">Autoimmune</span>
+                    <span class="topic-tag">Metabolic</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cases Section -->
+    <section id="cases" class="section">
+        <div class="container">
+            <h2 class="section-title">Session Cases</h2>
+            <p style="text-align: center; font-size: 1.1rem; margin-bottom: 3rem; color: #666;">Five carefully selected cases that build from foundational concepts to advanced diagnostic challenges in endocrine pathology.</p>
+            
+            <div class="cases-grid">
+                <div class="case-card">
+                    <div class="case-header">
+                        <div class="case-number">01</div>
+                        <div>
+                            <div class="case-title">Thyroid Nodule Evaluation</div>
+                            <div class="case-subtitle">Follicular Lesion Assessment</div>
+                        </div>
+                    </div>
+                    <div class="clinical-info">
+                        <h4>Clinical Information</h4>
+                        <p>45-year-old female with a 2.5 cm solitary thyroid nodule discovered on routine physical examination. Ultrasound shows a hypoechoic nodule with microcalcifications. Serum TSH is within normal limits. Fine needle aspiration performed.</p>
+                    </div>
+                    <a href="#" class="wsi-button">🔬 View Whole Slide Image</a>
+                </div>
+
+                <div class="case-card">
+                    <div class="case-header">
+                        <div class="case-number">02</div>
+                        <div>
+                            <div class="case-title">Adrenal Mass</div>
+                            <div class="case-subtitle">Cortical vs. Medullary Origin</div>
+                        </div>
+                    </div>
+                    <div class="clinical-info">
+                        <h4>Clinical Information</h4>
+                        <p>38-year-old male with hypertension and episodic palpitations. CT scan reveals a 4 cm right adrenal mass with heterogeneous enhancement. Elevated 24-hour urinary catecholamines and metanephrines. Surgical resection performed.</p>
+                    </div>
+                    <a href="#" class="wsi-button">🔬 View Whole Slide Image</a>
+                </div>
+
+                <div class="case-card">
+                    <div class="case-header">
+                        <div class="case-number">03</div>
+                        <div>
+                            <div class="case-title">Pituitary Adenoma</div>
+                            <div class="case-subtitle">Functional Classification</div>
+                        </div>
+                    </div>
+                    <div class="clinical-info">
+                        <h4>Clinical Information</h4>
+                        <p>29-year-old female with amenorrhea and galactorrhea for 8 months. MRI shows a 1.2 cm sellar mass with suprasellar extension. Elevated serum prolactin (180 ng/mL). Transsphenoidal resection performed due to visual field defects.</p>
+                    </div>
+                    <a href="#" class="wsi-button">🔬 View Whole Slide Image</a>
+                </div>
+
+                <div class="case-card">
+                    <div class="case-header">
+                        <div class="case-number">04</div>
+                        <div>
+                            <div class="case-title">Parathyroid Pathology</div>
+                            <div class="case-subtitle">Hyperplasia vs. Adenoma</div>
+                        </div>
+                    </div>
+                    <div class="clinical-info">
+                        <h4>Clinical Information</h4>
+                        <p>62-year-old male with nephrolithiasis and bone pain. Laboratory studies show elevated serum calcium (11.2 mg/dL) and parathyroid hormone (95 pg/mL). Sestamibi scan localizes to the right lower parathyroid gland. Surgical exploration performed.</p>
+                    </div>
+                    <a href="#" class="wsi-button">🔬 View Whole Slide Image</a>
+                </div>
+
+                <div class="case-card">
+                    <div class="case-header">
+                        <div class="case-number">05</div>
+                        <div>
+                            <div class="case-title">Pancreatic Neuroendocrine Tumor</div>
+                            <div class="case-subtitle">Grading and Staging</div>
+                        </div>
+                    </div>
+                    <div class="clinical-info">
+                        <h4>Clinical Information</h4>
+                        <p>56-year-old female with recurrent peptic ulcers and diarrhea. CT scan shows a 2.8 cm pancreatic tail mass with liver lesions. Elevated serum gastrin (850 pg/mL). Whipple procedure performed with liver biopsy of metastatic deposits.</p>
+                    </div>
+                    <a href="#" class="wsi-button">🔬 View Whole Slide Image</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resources Section -->
+    <section id="resources" class="resources-section section">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">Session Resources</h2>
+            <p style="font-size: 1.1rem; margin-bottom: 2rem; opacity: 0.9;">Access the complete session materials including the presentation slides and recorded video for review and reference.</p>
+            
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <div class="resource-icon">📊</div>
+                    <h3>Presentation Slides</h3>
+                    <p>Complete PowerPoint presentation with detailed case discussions, diagnostic criteria, and key learning points from the session.</p>
+                    <a href="#" class="resource-button">Download PowerPoint</a>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="resource-icon">🎥</div>
+                    <h3>Recorded Session</h3>
+                    <p>Full video recording of the live session including expert commentary, case discussions, and Q&A segment.</p>
+                    <a href="#" class="resource-button">Watch Recording</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Pathology Without Borders. Making pathology education accessible worldwide through open-source innovation.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all cards
+        document.querySelectorAll('.case-card, .resource-card').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Add click handlers for WSI buttons (placeholder functionality)
+        document.querySelectorAll('.wsi-button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                // In a real implementation, this would open the actual WSI viewer
+                alert('This would open the Whole Slide Image viewer for this case.');
+            });
+        });
+
+        // Add click handlers for resource buttons (placeholder functionality)
+        document.querySelectorAll('.resource-button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const buttonText = this.textContent;
+                if (buttonText.includes('PowerPoint')) {
+                    alert('This would download the PowerPoint presentation.');
+                } else if (buttonText.includes('Recording')) {
+                    alert('This would open the recorded session video.');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
