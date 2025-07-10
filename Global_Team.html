@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team Member - Pathology Without Borders</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header & Navigation */
+        header {
+            background: linear-gradient(135deg, #C5247F 0%, #8B1A5C 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        .back-btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .back-btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #C5247F 0%, #8B1A5C 100%);
+            color: white;
+            padding: 120px 0 80px;
+            text-align: center;
+            margin-top: 70px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .team-role-selector {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .role-btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+            backdrop-filter: blur(10px);
+        }
+
+        .role-btn:hover, .role-btn.active {
+            background: #FF6B9D;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255, 107, 157, 0.3);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Section Styling */
+        .section {
+            padding: 80px 0;
+            scroll-margin-top: 100px;
+        }
+
+        .section:nth-child(even) {
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #C5247F;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: #FF6B9D;
+        }
+
+        /* Team Grid */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .team-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .team-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, #C5247F, #FF6B9D);
+        }
+
+        .team-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(197, 36, 127, 0.15);
+        }
+
+        .team-avatar {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #C5247F, #8B1A5C);
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2.5rem;
+            font-weight: bold;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .team-avatar::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: rotate(45deg);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: rotate(45deg) translateX(-100%); }
+            100% { transform: rotate(45deg) translateX(100%); }
+        }
+
+        .team-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #C5247F;
+        }
+
+        .team-role {
+            color: #666;
+            font-style: italic;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .team-description {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .team-expertise {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .expertise-tag {
+            background: rgba(197, 36, 127, 0.1);
+            color: #C5247F;
+            padding: 0.4rem 1rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .team-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #C5247F;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-btn {
+            background: linear-gradient(135deg, #C5247F, #8B1A5C);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(197, 36, 127, 0.3);
+        }
+
+        /* Featured Members */
+        .featured-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+
+        .featured-card {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .featured-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(135deg, #C5247F, #FF6B9D);
+        }
+
+        .featured-avatar {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, #C5247F, #8B1A5C);
+            border-radius: 50%;
+            margin: 0 auto 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+            font-weight: bold;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .featured-name {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #C5247F;
+        }
+
+        .featured-role {
+            color: #666;
+            font-style: italic;
+            margin-bottom: 2rem;
+            font-size: 1.3rem;
+        }
+
+        .featured-bio {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .achievements {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .achievement-card {
+            background: rgba(197, 36, 127, 0.05);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border-left: 4px solid #C5247F;
+        }
+
+        .achievement-title {
+            font-weight: bold;
+            color: #C5247F;
+            margin-bottom: 0.5rem;
+        }
+
+        .achievement-desc {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Filter functionality */
+        .team-member {
+            display: block;
+            transition: opacity 0.3s ease;
+        }
+
+        .team-member.hidden {
+            display: none;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .role-btn {
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <a href="index.html" class="logo">🔬 Pathology Without Borders</a>
+            <ul class="nav-links">
+                <li><a href="index.html#home">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#team">Team</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+            <a href="index.html#team" class="back-btn">← Back to Team</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="team-role-selector">
+                    <button class="role-btn" data-section="all">All Members</button>
+                    <button class="role-btn" data-section="founding-section">Founding Pathologists</button>
+                    <button class="role-btn" data-section="engineering-section">Lead Engineers</button>
+                    <button class="role-btn" data-section="technology-section">Technology Experts</button>
+                    <button class="role-btn" data-section="advisory-section">Advisory Board</button>
+                </div>
+                <h1 class="fade-in">Meet Our Global Team</h1>
+                <p class="fade-in">Dedicated professionals revolutionizing pathology education worldwide</p>
+            </div>
+        </div>
+    </section>
+    <!-- Team Members Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Our Team Members</h2>
+            
+            <div class="team-grid">
+                <!-- Founding Pathologists -->
+                <div class="team-card team-member" data-role="founding">
+                    <div class="team-avatar">DR</div>
+                    <div class="team-name">Dr. Daniel Rosen</div>
+                    <div class="team-role">Co-Founding Pathologist</div>
+                    <div class="team-description">
+                        Specializes in surgical pathology and digital pathology. Pioneer in telepathology and remote consultation systems for underserved regions.
+                    </div>
+                    <div class="team-expertise">
+                        <span class="expertise-tag">Breast Pathology</span>
+                        <span class="expertise-tag">digital Diagnostics</span>
+                        <span class="expertise-tag">Telepathology</span>
+                    </div>
+                    <div class="team-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">20+</span>
+                            <span class="stat-label">Years Experience</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">100+</span>
+                            <span class="stat-label">Publications</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">150+</span>
+                            <span class="stat-label">Students Trained</span>
+                        </div>
+                    </div>
+                    <div class="contact-links">
+                        <a href="mailto:dgrosen@pathologywithoutborders.org" class="contact-btn">
+                            ✉️ Contact
+                        </a>
+                    </div>
+                </div>
+
+                <div class="team-card team-member" data-role="founding">
+                    <div class="team-avatar">KH</div>
+                    <div class="team-name">Dr. Kelsey Hummel</div>
+                    <div class="team-role">Co-Founding Pathologist</div>
+                    <div class="team-description">
+                        Expert in GYN pathology, cytology and global health. Leads our education initiatives and develops specialized training modules for complex cases.
+                    </div>
+                    <div class="team-expertise">
+                        <span class="expertise-tag">GYN Pathology</span>
+                        <span class="expertise-tag">Cytopathology</span>
+                        <span class="expertise-tag">Global health</span>
+                    </div>
+                    <div class="team-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">5+</span>
+                            <span class="stat-label"> years of global health Experience</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">5+</span>
+                            <span class="stat-label">Publications</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">100+</span>
+                            <span class="stat-label">Cases Documented</span>
+                        </div>
+                    </div>
+                    <div class="contact-links">
+                        <a href="mailto:KHummel@pathologywithoutborders.org" class="contact-btn">
+                            ✉️ Contact
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Lead Engineer -->
+                <div class="team-card team-member" data-role="engineering">
+                    <div class="team-avatar">JK</div>
+                    <div class="team-name">Joe Knapper</div>
+                    <div class="team-role">Lead Software Engineer</div>
+                    <div class="team-description">
+                        Full-stack developer with expertise in educational technology and digital pathology platforms. Architected our learning management system and interactive case viewer.
+                    </div>
+                    <div class="team-expertise">
+                        <span class="expertise-tag">Full-Stack Development</span>
+                        <span class="expertise-tag">EdTech Platforms</span>
+                        <span class="expertise-tag">Digital Pathology</span>
+                        <span class="expertise-tag">API Design</span>
+                    </div>
+                    <div class="team-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">8</span>
+                            <span class="stat-label">Years Experience</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">15+</span>
+                            <span class="stat-label">Projects Delivered</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">5</span>
+                            <span class="stat-label">Patents Filed</span>
+                        </div>
+                    </div>
+                    <div class="contact-links">
+                        <a href="mailto:alex.thompson@pathologywithoutborders.org" class="contact-btn">
+                            ✉️ Contact
+                        </a>
+                        <a href="#" class="contact-btn">
+                            💻 GitHub
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Technology Experts -->
+                <div class="team-card team-member" data-role="technology">
+                    <div class="team-avatar">TE</div>
+                    <div class="team-name">Dr. James Wilson</div>
+                    <div class="team-role">OpenFlexure Specialist</div>
+                    <div class="team-description">
+                        Biomedical engineer specializing in open-source microscopy. Leads integration of OpenFlexure technology into our educational platform and provides technical training.
+                    </div>
+                    <div class="team-expertise">
+                        <span class="expertise-tag">OpenFlexure Technology</span>
+                        <span class="expertise-tag">Microscopy</span>
+                        <span class="expertise-tag">Hardware Integration</span>
+                        <span class="expertise-tag">Technical Training</span>
+                    </div>
+                    <div class="team-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">15</span>
+                            <span class="stat-label">Years Experience</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">200+</span>
+                            <span class="stat-label">Microscopes Deployed</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">50+</span>
+                            <span class="stat-label">Institutions Trained</span>
+                        </div>
+                    </div>
+                    <div class="contact-links">
+                        <a href="mailto:james.wilson@pathologywithoutborders.org" class="contact-btn">
+                            ✉️ Contact
+                        </a>
+                    </div>
+                </div>
+
+                <div class="team-card team-member" data-role="technology">
+                    <div class="team-avatar">TE</div>
+                    <div class="team-name">Maria Santos</div>
+                    <div class="team-role">ORCA Platform Developer</div>
+                    <div class="team-description">
+                        Software architect focusing on collaborative research platforms. Develops tools for seamless knowledge sharing and multi-institutional collaboration.
+                    </div>
+                    <div class="team-expertise">
+                        <span class="expertise-tag">ORCA Platform</span>
+                        <span class="expertise-tag">Collaboration Tools</span>
+                        <span class="expertise-tag">Research Software</span>
+                        <span class="expertise-tag">Data Analytics</span>
+                    </div>
+                    <div class="team-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">6</span>
+                            <span class="stat-label">Years Experience</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">10+</span>
+                            <span class="stat-label">Platforms Built</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">1000+</span>
+                            <span class="stat-label">Active Users</span>
+                        </div>
+                    </div>
+                    <div class="contact-links">
+                        <a href="mailto:maria.santos@pathologywithoutborders.org" class="contact-btn">
+                            ✉️ Contact
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Advisory Board -->
+                <div class="team-card team-member" data-role="advisory">
+                    <div class="team-avatar">AB</div>
+                    <div class="team-name">Prof. David Kim</div>
+                    <div class="team-role">Strategic Advisor</div>
+                    <div class="team-description">
+                        Former WHO consultant and global health expert. Provides strategic guidance on international partnerships and sustainable program development.
+                    </div>
+                    <div class="team-expertise">
+                        <span class="expertise-tag">Global Health Strategy</span>
+                        <span class="expertise-tag">International Partnerships</span>
+                        <span class="expertise-tag">Program Development</span>
+                        <span class="expertise-tag">Policy Development</span>
+                    </div>
+                    <div class="team-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">20</span>
+                            <span class="stat-label">Years Experience</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">40+</span>
+                            <span class="stat-label">Countries Served</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">100+</span>
+                            <span class="stat-label">Strategic Reports</span>
+                        </div>
+                    </div>
+                    <div class="contact-links">
+                        <a href="mailto:david.kim@pathologywithoutborders.org" class="contact-btn">
+                            ✉️ Contact
+                        </a>
+                    </div>
+                </div>
+
+                <div class="team-card team-member" data-role="advisory">
+                    <div class="team-avatar">AB</div>
+                    <div class="team-name">Dr. Emily Johnson</div>
+                    <div class="team-role">Education Advisor</div>
+                    <div class="team-description">
+                        Medical education researcher and curriculum development expert. Ensures our programs meet international standards and educational best practices.
+                    </div>
+                    <div class="team-expertise">
+                        <span class="expertise-tag">Medical Education</span>
+                        <span class="expertise-tag">Curriculum Development</span>
+                        <span class="expertise-tag">Assessment Design</span>
+                        <span class="expertise-tag">Quality Assurance</span>
+                    </div>
+                    <div class="team-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">18</span>
+                            <span class="stat-label">Years Experience</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">25+</span>
+                            <span class="stat-label">Curricula Developed</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">500+</span>
+                            <span class="stat-label">Educators Trained</span>
+                        </div>
+                    </div>
+                    <div class="contact-links">
+                        <a href="mailto:emily.johnson@pathologywithoutborders.org" class="contact-btn">
+                            ✉️ Contact
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="background: #1a252f; color: white; text-align: center; padding: 2rem 0;">
+        <div class="container">
+            <p>&copy; 2025 Pathology Without Borders. Making pathology education accessible worldwide through open-source innovation.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Role filtering functionality
+        const roleButtons = document.querySelectorAll('.role-btn');
+        const teamMembers = document.querySelectorAll('.team-member');
+
+        roleButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                roleButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                button.classList.add('active');
+
+                const selectedRole = button.dataset.role;
+
+                // Show/hide team members based on selected role
+                teamMembers.forEach(member => {
+                    if (selectedRole === 'all' || member.dataset.role === selectedRole) {
+                        member.classList.add('active');
+                    } else {
+                        member.classList.remove('active');
+                    }
+                });
+            });
+        });
+
+        // Initialize with all members visible
+        teamMembers.forEach(member => {
+            member.classList.add('active');
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all cards
+        document.querySelectorAll('.team-card, .featured-card').forEach
